@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import axios from "axios"
 import URLForm from "./components/URLForm"
+import URLCard from "./components/URLCard"
 
 const API = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000"
 
@@ -51,7 +52,22 @@ export default function App() {
         <h1 className="text-3xl font-bold text-gray-800 mb-6">URL Shortener</h1>
         {error && <p className="text-red-500 mb-4">{error}</p>}
         <URLForm onShorten={handleShorten} />
-        {/* URL list goes here */}
+        {urls.length === 0 && (
+          <p className="text-gray-500 text-center">
+            No URLs created yet
+          </p>
+        )}
+        {urls.map((url) => (
+            <URLCard
+              key={url.id}
+              url={url}
+              onDelete={handleDelete}
+            />
+          ))}
+        <button onClick={fetchUrls}>
+          Refresh
+        </button>
+
       </div>
     </div>
   )
