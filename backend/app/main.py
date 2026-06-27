@@ -17,7 +17,9 @@ app = FastAPI(title="URL Shortener API")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-    "*"
+        "https://url-shortener-app-k7ld.onrender.com",
+        "http://localhost:5173",
+        "http://localhost:5174"
     ],
     allow_credentials=False,
     allow_methods=["*"],
